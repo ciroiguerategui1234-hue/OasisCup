@@ -19,6 +19,7 @@
       <a class="brand" href="#top" aria-label="Oasis Cup, inicio"><b>Oasis Cup</b><span>×</span><img src="assets/img/sponsors/mirabella.webp" alt="mirabella" width="1200" height="187"></a>
       <nav class="nav__links" aria-label="Principal">
         <a href="#formato">Cómo se juega</a>
+        <a href="#partidos">Partidos</a>
         <a href="#vestuario">Camisetas</a>
         <a href="#incluye">Qué incluye</a>
         <a href="#premios">Premios</a>
@@ -87,9 +88,34 @@
             <p class="nota">El formato puede variar según la cantidad de equipos inscriptos. Si cambia, lo avisamos acá antes del sorteo de zonas.</p>
           </div>
           <div>
-            <h3 class="t3">Fixture, horarios y resultados</h3>
-            <div id="fixture"><p class="nota">Los publicamos acá cuando cierre la inscripción. Durante el torneo, los resultados se actualizan partido a partido.</p></div>
+            <h3 class="t3">Partidos, horarios y resultados</h3>
+            <p class="nota">Están en <a href="#partidos">la sección de partidos</a>: se actualizan durante el torneo, partido a partido.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PARTIDOS -->
+    <section class="sec partidos-sec" id="partidos">
+      <div class="wrap">
+        <div class="sec__head">
+          <div>
+            <h2 class="t1">Partidos y resultados</h2>
+            <p class="lead" id="partidos-lead">Horarios, resultados y posiciones de cada zona, actualizados durante el torneo.</p>
+          </div>
+          <div class="seg seg--claro" role="tablist" aria-label="Categoría" id="pt-cat">
+            <button role="tab" aria-selected="true" data-c="masculino">Masculino</button>
+            <button role="tab" aria-selected="false" data-c="femenino">Femenino</button>
+          </div>
+        </div>
+        <div class="dias" role="tablist" aria-label="Día" id="pt-dias">
+          <button role="tab" aria-selected="true" data-d="7"><b>Jueves 7</b><small>de enero</small></button>
+          <button role="tab" aria-selected="false" data-d="8"><b>Viernes 8</b><small>de enero</small></button>
+          <button role="tab" aria-selected="false" data-d="9"><b>Sábado 9</b><small>de enero</small></button>
+        </div>
+        <div class="partidos">
+          <div class="partidos__lista" id="pt-lista" aria-live="polite"></div>
+          <aside class="posiciones" id="pt-tablas"></aside>
         </div>
       </div>
     </section>

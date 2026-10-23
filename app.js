@@ -65,24 +65,58 @@ tabs.addEventListener('click', (e) => {
   $('vest-msg').textContent = 'Tocá una camiseta para verla de cerca.';
 });
 
-/* Fixture: aparece cuando el organizador lo carga en la planilla */
-function pintarFixture() {
-  const fx = (estado && estado.fixture) || [];
-  if (!fx.length) return;
-  let html = '', dia = '', catAnt = '';
-  fx.forEach((p) => {
-    const c = (p.categoria || '').toLowerCase().startsWith('fem') ? 'Femenino' : 'Masculino';
-    if (p.dia !== dia || c !== catAnt) { html += `<p class="fx-day">${esc(p.dia)}, ${c.toLowerCase()}</p>`; dia = p.dia; catAnt = c; }
-    const jugado = p.golesA !== '' && p.golesA != null;
-    html += `<div class="fx"><time>${esc(p.hora)}</time><b class="a">${esc(p.equipoA)}</b><span class="sc">${jugado ? esc(p.golesA) + ' - ' + esc(p.golesB) : 'vs'}</span><b>${esc(p.equipoB)}</b>${p.fase || p.cancha ? `<small>${esc([p.fase, p.cancha].filter(Boolean).join(', cancha '))}</small>` : ''}</div>`;
+/* Partidos, horarios, resultados y posiciones: salen de la pestaña "Fixture web" */
+let ptCat = 'masculino', ptDia = '7';
+const diaNum = (d) => { const m = String(d || '').match(/\d+/); return m ? m[0] : ''; };
+const esCat = (p, c) => (p.categoria || '').toLowerCase().startsWith(c.slice(0, 3));
+const jugado = (p) => p.golesA !== '' && p.golesA != null && p.golesB !== '' && p.golesB != null;
+function posiciones(fx) {
+  const zonas = {};
+  fx.filter((p) => /^zona/i.test(p.fase || '')).forEach((p) => {
+    const z = (zonas[p.fase.trim()] = zonas[p.fase.trim()] || {});
+    [p.equipoA, p.equipoB].forEach((e) => { if (e && !z[e]) z[e] = { e, pj: 0, g: 0, em: 0, p: 0, gf: 0, gc: 0, pts: 0 }; });
+    if (!jugado(p) || !p.equipoA || !p.equipoB) return;
+    const a = z[p.equipoA], b = z[p.equipoB], ga = +p.golesA, gb = +p.golesB;
+    a.pj++; b.pj++; a.gf += ga; a.gc += gb; b.gf += gb; b.gc += ga;
+    if (ga > gb) { a.g++; b.p++; a.pts += 3; } else if (ga < gb) { b.g++; a.p++; b.pts += 3; } else { a.em++; b.em++; a.pts++; b.pts++; }
   });
-  $('fixture').innerHTML = html;
+  return Object.keys(zonas).sort().map((n) => ({ n, filas: Object.values(zonas[n]).sort((x, y) => y.pts - x.pts || (y.gf - y.gc) - (x.gf - x.gc) || y.gf - x.gf || x.e.localeCompare(y.e)) }));
 }
+function pintarPartidos() {
+  const fx = ((estado && estado.fixture) || []).filter((p) => esCat(p, ptCat));
+  const lista = $('pt-lista'), tablas = $('pt-tablas');
+  if (!fx.length) {
+    lista.innerHTML = `<div class="pt-vacio"><b>El fixture sale al cerrar la inscripción</b><p>Cuando estén las zonas armadas, acá vas a ver los horarios de cada partido y, durante el torneo, los resultados y las posiciones al momento.</p></div>`;
+    tablas.innerHTML = ''; return;
+  }
+  const delDia = fx.filter((p) => diaNum(p.dia) === ptDia).sort((x, y) => String(x.hora).localeCompare(String(y.hora)));
+  lista.innerHTML = delDia.length ? delDia.map((p) => {
+    const j = jugado(p), ga = +p.golesA, gb = +p.golesB;
+    return `<div class="partido"><time>${esc(p.hora)}</time><span class="partido__eq a${j && ga > gb ? ' gana' : ''}">${esc(p.equipoA || 'A definir')}</span>` +
+      `<span class="partido__sc${j ? '' : ' vs'}">${j ? esc(p.golesA) + ' - ' + esc(p.golesB) : 'vs'}</span>` +
+      `<span class="partido__eq${j && gb > ga ? ' gana' : ''}">${esc(p.equipoB || 'A definir')}</span>` +
+      (p.fase || p.cancha ? `<small>${esc([p.fase, p.cancha ? 'Cancha ' + p.cancha : ''].filter(Boolean).join(', '))}</small>` : '') + '</div>';
+  }).join('') : '<div class="pt-vacio"><p>No hay partidos de esta categoría este día.</p></div>';
+  const zs = posiciones(fx);
+  tablas.innerHTML = zs.length ? zs.map((z) => `<div><h3>${esc(z.n)}</h3><table><thead><tr><th>Equipo</th><th title="Partidos jugados">PJ</th><th title="Ganados">G</th><th title="Empatados">E</th><th title="Perdidos">P</th><th title="Diferencia de gol">DG</th><th>Pts</th></tr></thead><tbody>` +
+    z.filas.map((f, i) => `<tr class="${i < 2 ? 'pasa' : ''}"><td>${esc(f.e)}</td><td>${f.pj}</td><td>${f.g}</td><td>${f.em}</td><td>${f.p}</td><td>${f.gf - f.gc > 0 ? '+' : ''}${f.gf - f.gc}</td><td class="pts">${f.pts}</td></tr>`).join('') +
+    '</tbody></table></div>').join('') + '<p class="nota">Los dos primeros de cada zona pasan a semifinales.</p>' : '';
+}
+function tabsDe(id, attr, fn) {
+  const el = $(id);
+  el.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; el.querySelectorAll('button').forEach((x) => x.setAttribute('aria-selected', String(x === b))); fn(b.dataset[attr]); });
+}
+tabsDe('pt-cat', 'c', (c) => { ptCat = c; pintarPartidos(); });
+tabsDe('pt-dias', 'd', (d) => { ptDia = d; pintarPartidos(); });
+// durante el torneo arranca en el día de hoy
+(() => { const h = new Date(); if (h.getFullYear() === 2027 && h.getMonth() === 0 && [7, 8, 9].includes(h.getDate())) { ptDia = String(h.getDate()); $('pt-dias').querySelectorAll('button').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.d === ptDia))); } })();
+pintarPartidos();
+
 function cargar() {
   S.estado().then((e) => {
     estado = e;
     if (vest) vest.setTomados(e.tomados); else window.__pintarFallback();
-    pintarFixture();
+    pintarPartidos();
     $('cierre-libres').textContent = C.COLORES.filter((c) => !e.tomados.masculino[c.id]).length;
     $('cierre-libres-f').textContent = C.COLORES.filter((c) => !e.tomados.femenino[c.id]).length;
   }).catch(() => {});

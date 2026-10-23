@@ -137,6 +137,37 @@ a { color: inherit; }
 .fx .sc { font-family: var(--display); font-weight: 900; font-size: 1.3rem; }
 .fx small { grid-column: 2 / -1; opacity: .7; }
 
+/* Partidos */
+.seg--claro { background: rgba(15,29,23,.07); }
+.seg--claro button[aria-selected="true"] { background: var(--tinta); color: var(--cal); }
+.dias { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1.5px solid var(--tinta); }
+.dias button { display: grid; justify-items: start; gap: 0; padding: 12px 0 14px; background: none; border: 0; border-bottom: 4px solid transparent; margin-bottom: -2.5px; cursor: pointer; color: var(--gris); text-align: left; }
+.dias b { font-family: var(--display); font-weight: 800; font-size: 1.6rem; text-transform: uppercase; line-height: 1; }
+.dias small { font-size: .9rem; }
+.dias button[aria-selected="true"] { color: var(--tinta); border-bottom-color: var(--cesped); }
+.partidos { display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; margin-top: 28px; align-items: start; }
+.partido { display: grid; grid-template-columns: 70px 1fr 92px 1fr; gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid rgba(15,29,23,.14); }
+.partido time { font-family: var(--display); font-weight: 800; font-size: 1.4rem; }
+.partido__eq { font-family: var(--display); font-weight: 700; font-size: 1.35rem; text-transform: uppercase; line-height: 1.05; }
+.partido__eq.a { text-align: right; }
+.partido__eq.gana { color: var(--cesped); }
+.partido__sc { display: grid; place-items: center; min-height: 44px; border-radius: var(--r); background: var(--tinta); color: var(--cal); font-family: var(--display); font-weight: 800; font-size: 1.5rem; letter-spacing: .04em; }
+.partido__sc.vs { background: transparent; color: var(--gris); border: 1px solid rgba(15,29,23,.2); font-size: 1.05rem; font-weight: 700; }
+.partido small { grid-column: 2 / -1; color: var(--gris); font-size: .88rem; margin-top: -8px; text-align: center; }
+.posiciones { display: grid; gap: 28px; }
+.posiciones h3 { font-family: var(--display); font-weight: 800; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 6px; }
+.posiciones table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+.posiciones th { text-align: right; font-weight: 500; color: var(--gris); font-size: .82rem; padding: 6px 4px; border-bottom: 1.5px solid var(--tinta); }
+.posiciones th:first-child, .posiciones td:first-child { text-align: left; }
+.posiciones td { text-align: right; padding: 9px 4px; border-bottom: 1px solid rgba(15,29,23,.12); font-variant-numeric: tabular-nums; }
+.posiciones td:first-child { font-weight: 700; }
+.posiciones td.pts { font-family: var(--display); font-weight: 800; font-size: 1.15rem; }
+.posiciones tr.pasa td:first-child { box-shadow: inset 3px 0 0 var(--cesped); padding-left: 10px; }
+.posiciones .nota { margin-top: 8px; }
+.pt-vacio { padding: 28px 0; }
+.pt-vacio b { display: block; font-family: var(--display); font-weight: 800; font-size: 1.8rem; text-transform: uppercase; }
+.pt-vacio p { color: var(--gris); max-width: 52ch; margin-top: 6px; }
+
 /* Vestuario 3D */
 .vest-sec { padding: clamp(80px, 9vw, 112px) 0 52px; }
 .vest-sec__side { display: grid; gap: 10px; justify-items: end; }
@@ -268,6 +299,7 @@ a { color: inherit; }
   .sede img { min-height: 260px; max-height: 340px; }
   .faq { grid-template-columns: 1fr; gap: 24px; }
   .faq__ping { display: none; }
+  .partidos { grid-template-columns: 1fr; gap: 40px; }
   .sponsors ul { grid-template-columns: 1fr 1fr; }
   .sponsors li:nth-child(3) { border-left: 0; }
   .sponsors li:nth-child(n+3) { border-top: 1px solid rgba(247,247,242,.14); }
@@ -298,5 +330,10 @@ a { color: inherit; }
   .vest .flecha { width: 46px; height: 46px; font-size: 1.6rem; top: 44%; }
   .cierre__ping { width: 120px; bottom: auto; top: -40px; }
   .zona ol { display: none; }
+  .dias b { font-size: 1.2rem; }
+  .partido { grid-template-columns: 1fr 64px 1fr; gap: 10px; }
+  .partido time { grid-column: 1 / -1; font-size: 1.1rem; }
+  .partido__eq { font-size: 1.1rem; }
+  .partido small { grid-column: 1 / -1; margin-top: -4px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

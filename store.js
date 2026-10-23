@@ -25,6 +25,20 @@ window.OasisStore = (function () {
     try { localStorage.setItem(DEMO_KEY, JSON.stringify(propias)); } catch (e) {}
   }
 
+  // fixture de ejemplo para ver la sección de partidos: agregá ?fixture=demo a la dirección
+  function fixtureDemo() {
+    var M = 'Masculino';
+    return [
+      { categoria: M, dia: '7', hora: '19:00', equipoA: 'Los Lobos', equipoB: 'Real Golfo', golesA: 3, golesB: 1, fase: 'Zona A', cancha: '1' },
+      { categoria: M, dia: '7', hora: '19:40', equipoA: 'Tehuelches', equipoB: 'Punta Cuevas', golesA: 2, golesB: 2, fase: 'Zona A', cancha: '1' },
+      { categoria: M, dia: '7', hora: '20:20', equipoA: 'El Doradillo', equipoB: 'Los Pibes', golesA: 0, golesB: 1, fase: 'Zona B', cancha: '1' },
+      { categoria: M, dia: '7', hora: '21:00', equipoA: 'Ballenera', equipoB: 'Muelle Norte', golesA: '', golesB: '', fase: 'Zona B', cancha: '1' },
+      { categoria: M, dia: '8', hora: '19:00', equipoA: 'Los Lobos', equipoB: 'Tehuelches', golesA: '', golesB: '', fase: 'Zona A', cancha: '1' },
+      { categoria: M, dia: '9', hora: '20:00', equipoA: '1° Zona A', equipoB: '2° Zona B', golesA: '', golesB: '', fase: 'Semifinal', cancha: '1' },
+      { categoria: M, dia: '9', hora: '22:00', equipoA: '', equipoB: '', golesA: '', golesB: '', fase: 'Final', cancha: '1' }
+    ];
+  }
+
   function armarEstado(lista, fixture) {
     var now = Date.now(), tomados = { masculino: {}, femenino: {} }, confirmados = { masculino: [], femenino: [] }, inscriptos = { masculino: 0, femenino: 0 };
     lista.forEach(function (i) {
@@ -37,7 +51,7 @@ window.OasisStore = (function () {
   }
 
   function estado() {
-    if (demo) return Promise.resolve(armarEstado(demoLeer(), []));
+    if (demo) return Promise.resolve(armarEstado(demoLeer(), /fixture=demo/.test(location.search) ? fixtureDemo() : []));
     return fetch(C.API_URL + '?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
       if (!d || !d.ok) throw new Error('respuesta');
       return armarEstado(d.inscripciones || [], d.fixture || []);

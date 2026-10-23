@@ -10,6 +10,11 @@
    - Quién tiene acceso: **Cualquier usuario**
    Tocá **Implementar** y copiá la URL que termina en `/exec`.
 5. Esa URL va en `config.js`, en `API_URL`.
+6. Opcional: elegí **borrarEquiposDeCostos** y tocá **Ejecutar** para vaciar la lista de equipos de la pestaña Costos (deja títulos y montos).
+
+## Fixture web
+Una fila por partido: Categoría (Masculino o Femenino), Día (7, 8 o 9, o la fecha), Hora (20:30), Equipo A, Goles A, Goles B, Equipo B, Fase (Zona A, Zona B, Semifinal, Final) y Cancha.
+La página arma sola las posiciones de cada zona con los partidos que tengan goles cargados.
 
 ## Día a día
 - Cada inscripción entra como **Pendiente de pago** en la pestaña Inscripciones, y los jugadores en Jugadores. Te llega un mail.

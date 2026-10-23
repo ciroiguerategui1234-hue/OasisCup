@@ -69,6 +69,16 @@ function hoja_(ss, nombre, headers) {
   return h;
 }
 
+/* ---------- Limpieza: vacía la lista de equipos de la pestaña Costos ----------
+   Borra solo los datos de los equipos (columnas D a H, desde la fila 3).
+   Deja los títulos de la tabla y los montos de la columna A y B. Ejecutalo una vez. */
+function borrarEquiposDeCostos() {
+  const h = SpreadsheetApp.getActive().getSheetByName('Costos');
+  if (!h) return;
+  const ultima = Math.max(h.getLastRow(), 3);
+  h.getRange(3, 4, ultima - 2, 5).clearContent();
+}
+
 /* ---------- La página lee: colores tomados y fixture (sin datos personales) ---------- */
 function doGet() {
   const ss = SpreadsheetApp.getActive();
@@ -77,7 +87,7 @@ function doGet() {
     color: r['Color (código)'], hex: r['Tono elegido'], estado: r['Estado']
   }));
   const fixture = filas_(ss.getSheetByName('Fixture web')).filter((r) => r['Equipo A'] || r['Equipo B']).map((r) => ({
-    categoria: r['Categoría'], dia: r['Día'] instanceof Date ? Utilities.formatDate(r['Día'], 'America/Argentina/Buenos_Aires', 'EEEE d') : r['Día'],
+    categoria: r['Categoría'], dia: r['Día'] instanceof Date ? String(r['Día'].getDate()) : String(r['Día']),
     hora: r['Hora'] instanceof Date ? Utilities.formatDate(r['Hora'], 'America/Argentina/Buenos_Aires', 'HH:mm') : r['Hora'],
     equipoA: r['Equipo A'], equipoB: r['Equipo B'], golesA: r['Goles A'], golesB: r['Goles B'], fase: r['Fase'], cancha: r['Cancha']
   }));
