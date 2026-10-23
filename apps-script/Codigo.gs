@@ -6,6 +6,10 @@
  * están tomados. Vos aprobás los pagos cambiando la columna "Estado".
  */
 
+// Planilla donde se guardan las inscripciones (sirve aunque el script sea un proyecto aparte)
+const PLANILLA_ID = '1B5zPrYvx3o7nCkpvs9yam-swz-14Gj3VZ15MEYAqA58';
+function libro_() { return SpreadsheetApp.getActive() || SpreadsheetApp.openById(PLANILLA_ID); }
+
 const CONFIG = {
   RESERVA_HORAS: 48,
   CUPO: { masculino: 12, femenino: 6 },
@@ -20,7 +24,7 @@ const H_FIX = ['Categoría', 'Día', 'Hora', 'Equipo A', 'Goles A', 'Goles B', '
 
 /* ---------- 1. Ejecutá esto una sola vez ---------- */
 function configurar() {
-  const ss = SpreadsheetApp.getActive();
+  const ss = libro_();
   const ins = hoja_(ss, 'Inscripciones', H_INS);
   hoja_(ss, 'Jugadores', H_JUG);
   const fix = hoja_(ss, 'Fixture web', H_FIX);
@@ -58,7 +62,7 @@ function configurar() {
   res.setColumnWidth(1, 260);
   const hoja1 = ss.getSheetByName('Hoja 1') || ss.getSheetByName('Sheet1');
   if (hoja1 && ss.getSheets().length > 1 && hoja1.getLastRow() === 0) ss.deleteSheet(hoja1);
-  ss.setActiveSheet(ins);
+  if (SpreadsheetApp.getActive()) ss.setActiveSheet(ins);
 }
 
 function hoja_(ss, nombre, headers) {
@@ -73,7 +77,7 @@ function hoja_(ss, nombre, headers) {
    Borra solo los datos de los equipos (columnas D a H, desde la fila 3).
    Deja los títulos de la tabla y los montos de la columna A y B. Ejecutalo una vez. */
 function borrarEquiposDeCostos() {
-  const h = SpreadsheetApp.getActive().getSheetByName('Costos');
+  const h = libro_().getSheetByName('Costos');
   if (!h) return;
   const ultima = Math.max(h.getLastRow(), 3);
   h.getRange(3, 4, ultima - 2, 5).clearContent();
@@ -81,7 +85,7 @@ function borrarEquiposDeCostos() {
 
 /* ---------- La página lee: colores tomados y fixture (sin datos personales) ---------- */
 function doGet() {
-  const ss = SpreadsheetApp.getActive();
+  const ss = libro_();
   const ins = filas_(ss.getSheetByName('Inscripciones')).map((r) => ({
     codigo: r['Código'], fecha: fechaISO_(r['Fecha']), categoria: r['Categoría'], equipo: r['Equipo'],
     color: r['Color (código)'], hex: r['Tono elegido'], estado: r['Estado']
@@ -103,7 +107,7 @@ function doPost(e) {
     const cat = d.categoria === 'femenino' ? 'femenino' : 'masculino';
     if (!d.equipo || !d.capitan || !Array.isArray(d.jugadores) || d.jugadores.length < 8) return json_({ ok: false, error: 'datos' });
 
-    const ss = SpreadsheetApp.getActive();
+    const ss = libro_();
     const hIns = ss.getSheetByName('Inscripciones');
     const ahora = new Date();
     const vigentes = filas_(hIns).filter((r) => r['Categoría'] === cat && vigente_(r, ahora));
