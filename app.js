@@ -106,13 +106,10 @@ trazar(); addEventListener('resize', trazar); document.fonts && document.fonts.r
 if (window.gsap && !reduce) {
   gsap.registerPlugin(ScrollTrigger);
   addEventListener('load', () => { trazar(); ScrollTrigger.refresh(); });
-  const cal = document.querySelectorAll('.hero__cal *');
-  cal.forEach((p) => { const L = p.getTotalLength ? p.getTotalLength() : 3000; p.style.strokeDasharray = L; p.style.strokeDashoffset = L; });
   gsap.timeline({ defaults: { ease: 'expo.out' } })
-    .to(cal, { strokeDashoffset: 0, duration: 1.8, stagger: .15, ease: 'power2.inOut' }, 0)
-    .from('.hero__t span', { yPercent: 100, opacity: 0, duration: 1.1, stagger: .12 }, .1)
-    .from('.hero__x, .hero__sub, .hero__cta', { y: 16, opacity: 0, duration: .8, stagger: .08 }, .55)
-    .from('.hero__ping', { x: 160, rotation: 25, opacity: 0, duration: 1.2, ease: 'back.out(1.4)' }, .45);
+    .from('.hero__foto img', { scale: 1.08, duration: 2.4, ease: 'power2.out' }, 0)
+    .from('.hero__pre, .hero__t, .hero__x', { y: 24, opacity: 0, duration: 1.2, stagger: .1 }, .15)
+    .from('.hero__pie', { opacity: 0, duration: 1 }, .7);
   ScrollTrigger.create({
     trigger: llave, start: 'top 75%', once: true,
     onEnter: () => {

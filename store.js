@@ -1,7 +1,7 @@
 // Oasis Cup · conexión con la planilla (Google Apps Script) o modo demostración
 window.OasisStore = (function () {
   var C = window.OASIS;
-  var DEMO_KEY = 'oasiscup-demo-v1';
+  var DEMO_KEY = 'oasiscup-demo-v2';   // clave nueva: borra las pruebas anteriores
   var demo = !C.API_URL;
 
   function horas(h) { return h * 3600e3; }
@@ -13,13 +13,7 @@ window.OasisStore = (function () {
 
   // ---------- Modo demostración: algunos equipos de ejemplo + lo que se inscriba en este navegador ----------
   function demoLeer() {
-    var base = [
-      { codigo: 'OC-DEMO1', fecha: new Date(Date.now() - horas(30)).toISOString(), categoria: 'masculino', equipo: 'Los Pibes de Tehuelche', color: 'bordo', estado: 'Seña pagada' },
-      { codigo: 'OC-DEMO2', fecha: new Date(Date.now() - horas(5)).toISOString(), categoria: 'masculino', equipo: 'La Scaloneta Madrynense', color: 'verde', estado: 'Pendiente de pago' },
-      { codigo: 'OC-DEMO3', fecha: new Date(Date.now() - horas(50)).toISOString(), categoria: 'masculino', equipo: 'Real Golfo', color: 'blanco', estado: 'Pagado' },
-      { codigo: 'OC-DEMO4', fecha: new Date(Date.now() - horas(20)).toISOString(), categoria: 'femenino', equipo: 'Las Ballenas FC', color: 'celeste', estado: 'Seña pagada' },
-      { codigo: 'OC-DEMO5', fecha: new Date(Date.now() - horas(72)).toISOString(), categoria: 'femenino', equipo: 'Equipo vencido', color: 'salmon', estado: 'Pendiente de pago' }
-    ];
+    var base = [];   // sin equipos de ejemplo: arranca en cero
     var propias = [];
     try { propias = JSON.parse(localStorage.getItem(DEMO_KEY) || '[]'); } catch (e) {}
     return base.concat(propias);
