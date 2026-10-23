@@ -138,6 +138,7 @@ export function createVestuario(root, opts = {}) {
     const d = Math.max(PH / (0.78 * 2 * tan), PW / (0.92 * cam.aspect * 2 * tan));
     avance = clamp(camZ - d, 0, 2.5);
     cam.position.set(0, 0.12, camZ); cam.lookAt(0, 0.12, 0);
+    root.style.setProperty('--foto-w', (W * PW / (2 * tan * camZ * cam.aspect)).toFixed(0) + 'px');
     cam.updateProjectionMatrix();
   }
   new ResizeObserver(resize).observe(root); resize();
@@ -198,6 +199,8 @@ export function createVestuario(root, opts = {}) {
 
   /* ---------- animación ---------- */
   const clock = new THREE.Clock(), v = new THREE.Vector3();
+  const prevBtn = root.querySelector('.flecha--prev'), nextBtn = root.querySelector('.flecha--next');
+  let lastTi = -1;
   let visible = true;
   new IntersectionObserver((e) => { visible = e[0].isIntersecting; }).observe(root);
   function loop() {
@@ -205,6 +208,8 @@ export function createVestuario(root, opts = {}) {
     if (!visible) { clock.getDelta(); return; }
     const dt = Math.min(clock.getDelta(), 0.05);
     if (!dragging) pos += (target - pos) * (reduce ? 1 : Math.min(1, dt * 5));
+    const ti = Math.round(dragging ? pos : target);
+    if (ti !== lastTi) { lastTi = ti; prevBtn && (prevBtn.disabled = ti <= 0); nextBtn && (nextBtn.disabled = ti >= MAX); }
     items.forEach((it) => {
       const sel = st.elegido === it;
       it.f += ((sel ? 1 : 0) - it.f) * (reduce ? 1 : Math.min(1, dt * 4));

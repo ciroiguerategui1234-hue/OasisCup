@@ -56,7 +56,7 @@ if (!vest) {
   };
   window.__pintarFallback();
 }
-document.querySelectorAll('.vest__bar .flecha').forEach((b) => b.addEventListener('click', () => vest && vest.mover(+b.dataset.dir)));
+document.querySelectorAll('#vest .flecha').forEach((b) => b.addEventListener('click', () => vest && vest.mover(+b.dataset.dir)));
 const tabs = $('cat-tabs');
 tabs.addEventListener('click', (e) => {
   const b = e.target.closest('button'); if (!b) return;

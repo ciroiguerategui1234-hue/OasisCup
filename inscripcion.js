@@ -147,7 +147,7 @@ if (!eligen) {
   $('asignada').hidden = false;
   document.querySelector('[data-step="3"] .paso__t').textContent = 'La camiseta';
 } else if (!vest) { pintarFallback(); $('vest-fallback').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) ponerColor(b.dataset.c === 'otro' ? { id: 'otro', n: 'Otro color', hex: $('otro-color').value } : C.COLORES.find((c) => c.id === b.dataset.c)); }); }
-document.querySelectorAll('.vest__bar .flecha').forEach((b) => b.addEventListener('click', () => vest && vest.mover(+b.dataset.dir)));
+document.querySelectorAll('#vest .flecha').forEach((b) => b.addEventListener('click', () => vest && vest.mover(+b.dataset.dir)));
 
 function ponerColor(c) {
   color = { ...c };

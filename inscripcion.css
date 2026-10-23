@@ -62,8 +62,6 @@
 .paso--wide { padding: 0; }
 .vest--ins { height: clamp(460px, 60vh, 600px); margin: 10px auto 0; max-width: 1200px; border-radius: 0; color: var(--cal); }
 @media (min-width: 1248px) { .vest--ins { border-radius: 14px; } }
-.ins .vest__bar .flecha { border-color: rgba(15,29,23,.3); color: var(--tinta); }
-.ins .vest__bar .flecha:hover { border-color: var(--cesped); color: var(--cesped); }
 .ins .vest__msg a { color: var(--cesped); }
 .ins .maqueta { border-left-color: var(--cesped); }
 .ins .maqueta b { color: var(--cesped); }
