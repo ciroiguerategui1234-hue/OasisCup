@@ -241,7 +241,7 @@ function listo(cod) {
 /* ---------- datos ---------- */
 function cargar() {
   S.estado().then((e) => {
-    estado = e; $('demo-ribbon').hidden = !e.demo; pintarCupo(); llenarAlternativo();
+    estado = e; pintarCupo(); llenarAlternativo();
     if (vest) vest.setTomados(e.tomados); else pintarFallback();
     if (eligen && color && color.id !== 'otro' && e.tomados[cat()][color.id]) quitarColor('Ese color se acaba de ocupar. Elegí otro.');
     const pre = q.get('color');

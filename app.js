@@ -113,7 +113,7 @@ pintarPartidos();
 
 function cargar() {
   S.estado().then((e) => {
-    estado = e; $('demo-ribbon').hidden = !e.demo;
+    estado = e;
     if (vest) vest.setTomados(e.tomados); else window.__pintarFallback();
     pintarPartidos();
     $('cierre-libres').textContent = C.COLORES.filter((c) => !e.tomados.masculino[c.id]).length;
