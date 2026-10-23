@@ -65,7 +65,7 @@
 .ins .vest__bar .flecha { border-color: rgba(15,29,23,.3); color: var(--tinta); }
 .ins .vest__bar .flecha:hover { border-color: var(--cesped); color: var(--cesped); }
 .ins .vest__msg a { color: var(--cesped); }
-.ins .maqueta { background: rgba(30,107,59,.08); }
+.ins .maqueta { border-left-color: var(--cesped); }
 .ins .maqueta b { color: var(--cesped); }
 .eleccion { display: flex; flex-wrap: wrap; align-items: end; gap: 16px 28px; margin-top: 22px; padding: 18px 20px; border-radius: var(--r); background: #fff; border: 1.5px solid var(--cesped); }
 .eleccion__main { display: flex; align-items: center; gap: 14px; margin-right: auto; }
