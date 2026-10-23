@@ -10,7 +10,6 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const shirtSVG = (hex) => `<svg class="shirt" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 4c1.2 2 8.8 2 10 0l6 2 4 7-4 3-2-2v15H7V14l-2 2-4-3 4-7z" fill="${hex}" stroke="rgba(15,29,23,.35)" stroke-width="1.2"/></svg>`;
 let toastT;
 function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('is-on'), 3800); }
-if (S.demo) $('demo-ribbon').hidden = false;
 
 const q = new URLSearchParams(location.search);
 let estado = { tomados: { masculino: {}, femenino: {} }, inscriptos: { masculino: 0, femenino: 0 } };
@@ -242,7 +241,7 @@ function listo(cod) {
 /* ---------- datos ---------- */
 function cargar() {
   S.estado().then((e) => {
-    estado = e; pintarCupo(); llenarAlternativo();
+    estado = e; $('demo-ribbon').hidden = !e.demo; pintarCupo(); llenarAlternativo();
     if (vest) vest.setTomados(e.tomados); else pintarFallback();
     if (eligen && color && color.id !== 'otro' && e.tomados[cat()][color.id]) quitarColor('Ese color se acaba de ocupar. Elegí otro.');
     const pre = q.get('color');

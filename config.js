@@ -1,7 +1,7 @@
 // Oasis Cup × mirabella · configuración (lo que cambia el organizador)
 window.OASIS = {
   // URL de la app de Google Apps Script (ver LEEME). Vacío = modo demostración (los datos quedan en el navegador).
-  API_URL: '',
+  API_URL: '/api/inscripciones',
 
   INSTAGRAM: 'oasisparty.pm',
   PRECIO_TOTAL: 250000,

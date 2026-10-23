@@ -7,7 +7,6 @@ const plata = (n) => '$' + Number(n).toLocaleString('es-AR');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-if (S.demo) $('demo-ribbon').hidden = false;
 $('pl-precio').textContent = plata(C.PRECIO_TOTAL) + ' por equipo';
 $('precio-total').textContent = plata(C.PRECIO_TOTAL);
 $('precio-sena').textContent = plata(C.PRECIO_SENA);
@@ -114,7 +113,7 @@ pintarPartidos();
 
 function cargar() {
   S.estado().then((e) => {
-    estado = e;
+    estado = e; $('demo-ribbon').hidden = !e.demo;
     if (vest) vest.setTomados(e.tomados); else window.__pintarFallback();
     pintarPartidos();
     $('cierre-libres').textContent = C.COLORES.filter((c) => !e.tomados.masculino[c.id]).length;

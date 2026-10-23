@@ -1,4 +1,4 @@
-// Oasis Cup · conexión con la planilla (Google Apps Script) o modo demostración
+// Oasis Cup · conexión con la planilla (función de Vercel /api/inscripciones) o modo demostración
 window.OasisStore = (function () {
   var C = window.OASIS;
   var DEMO_KEY = 'oasiscup-demo-v2';   // clave nueva: borra las pruebas anteriores
@@ -47,14 +47,19 @@ window.OasisStore = (function () {
       if (C.COLORES.some(function (c) { return c.id === i.color; })) tomados[i.categoria][i.color] = { equipo: i.equipo, estado: i.estado };
       if (i.estado === 'Seña pagada' || i.estado === 'Pagado') confirmados[i.categoria].push({ equipo: i.equipo, color: i.color, hex: i.hex || '' });
     });
-    return { tomados: tomados, confirmados: confirmados, inscriptos: inscriptos, fixture: fixture || [], demo: demo };
+    return { tomados: tomados, confirmados: confirmados, inscriptos: inscriptos, fixture: fixture || [], demo: !api };
   }
 
+  // Si la función de Vercel todavía no tiene las claves (o no existe), la web sigue en modo demostración
+  var api = !demo;
   function estado() {
-    if (demo) return Promise.resolve(armarEstado(demoLeer(), /fixture=demo/.test(location.search) ? fixtureDemo() : []));
+    if (!api) return Promise.resolve(armarEstado(demoLeer(), /fixture=demo/.test(location.search) ? fixtureDemo() : []));
     return fetch(C.API_URL + '?t=' + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
-      if (!d || !d.ok) throw new Error('respuesta');
+      if (!d || !d.ok) throw new Error(d && d.error || 'respuesta');
       return armarEstado(d.inscripciones || [], d.fixture || []);
+    }).catch(function (e) {
+      if (/sin_configurar|Unexpected|JSON|Failed to fetch|NetworkError/i.test(String(e && e.message))) { api = false; demo = true; return estado(); }
+      throw e;
     });
   }
 
@@ -65,7 +70,7 @@ window.OasisStore = (function () {
   }
 
   function inscribir(datos) {
-    if (demo) {
+    if (!api) {
       return estado().then(function (e) {
         if (C.CUPO[datos.categoria] && e.inscriptos[datos.categoria] >= C.CUPO[datos.categoria]) return { ok: false, error: 'cupo_completo' };
         if (datos.color !== 'otro' && e.tomados[datos.categoria][datos.color]) return { ok: false, error: 'color_tomado', equipo: e.tomados[datos.categoria][datos.color].equipo };
@@ -75,9 +80,9 @@ window.OasisStore = (function () {
       });
     }
     // text/plain evita el preflight de CORS que Apps Script no responde
-    return fetch(C.API_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(datos) })
+    return fetch(C.API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(datos) })
       .then(function (r) { return r.json(); });
   }
 
-  return { estado: estado, inscribir: inscribir, demo: demo };
+  return { estado: estado, inscribir: inscribir, get demo() { return !api; } };
 })();
