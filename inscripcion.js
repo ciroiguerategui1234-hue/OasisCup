@@ -7,7 +7,7 @@ const form = $('form'), F = form.elements;
 const plata = (n) => '$' + Number(n).toLocaleString('es-AR');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const shirtSVG = (hex) => `<svg class="shirt" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 4c1.2 2 8.8 2 10 0l6 2 4 7-4 3-2-2v15H7V14l-2 2-4-3 4-7z" fill="${hex}" stroke="rgba(244,241,232,.55)" stroke-width="1.2"/></svg>`;
+const shirtSVG = (hex) => `<svg class="shirt" viewBox="0 0 32 32" aria-hidden="true"><path d="M11 4c1.2 2 8.8 2 10 0l6 2 4 7-4 3-2-2v15H7V14l-2 2-4-3 4-7z" fill="${hex}" stroke="rgba(15,29,23,.35)" stroke-width="1.2"/></svg>`;
 let toastT;
 function toast(m) { const t = $('toast'); t.textContent = m; t.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('is-on'), 3800); }
 if (S.demo) $('demo-ribbon').hidden = false;
@@ -147,7 +147,7 @@ if (!eligen) {
   $('asignada').hidden = false;
   document.querySelector('[data-step="3"] .paso__t').textContent = 'La camiseta';
 } else if (!vest) { pintarFallback(); $('vest-fallback').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b) ponerColor(b.dataset.c === 'otro' ? { id: 'otro', n: 'Otro color', hex: $('otro-color').value } : C.COLORES.find((c) => c.id === b.dataset.c)); }); }
-document.querySelectorAll('.vest__bar .round').forEach((b) => b.addEventListener('click', () => vest && vest.mover(+b.dataset.dir)));
+document.querySelectorAll('.vest__bar .flecha').forEach((b) => b.addEventListener('click', () => vest && vest.mover(+b.dataset.dir)));
 
 function ponerColor(c) {
   color = { ...c };
@@ -169,8 +169,9 @@ F.equipo.addEventListener('input', () => vest && vest.setEquipo(F.equipo.value.t
 
 /* ---------- Paso 4: pago ---------- */
 $('m-sena').textContent = plata(C.PRECIO_SENA); $('m-total').textContent = plata(C.PRECIO_TOTAL);
+$('m-sena-txt').textContent = `Los otros ${plata(C.PRECIO_TOTAL - C.PRECIO_SENA)} hasta el ${C.SALDO_HASTA}`;
 $('alias').textContent = C.ALIAS; $('titular').textContent = C.TITULAR;
-$('aviso-reserva').textContent = `Al confirmar, la camiseta queda reservada ${C.RESERVA_HORAS} horas. Si en ese tiempo no recibimos la seña, el color se libera.`;
+$('aviso-reserva').textContent = `Al confirmar, la camiseta queda reservada ${C.RESERVA_HORAS} horas. Si en ese tiempo no recibimos el pago, el color se libera para otro equipo.`;
 $('copy-alias').addEventListener('click', () => copiar(C.ALIAS, 'Alias copiado.'));
 function monto() { return form.querySelector('input[name=pago]:checked').value === 'total' ? C.PRECIO_TOTAL : C.PRECIO_SENA; }
 function resumen() {
@@ -183,7 +184,7 @@ function resumen() {
     <dt>Capitán/a</dt><dd>${esc(F.capitan.value.trim())}, ${esc(F.telefono.value.trim())}</dd></dl>`;
 }
 function mensaje(cod) {
-  const pago = monto() === C.PRECIO_TOTAL ? `el total (${plata(C.PRECIO_TOTAL)})` : `la seña (${plata(C.PRECIO_SENA)})`;
+  const pago = monto() === C.PRECIO_TOTAL ? `el total (${plata(C.PRECIO_TOTAL)})` : `la mitad (${plata(C.PRECIO_SENA)}) y el resto hasta el ${C.SALDO_HASTA}`;
   return `¡Hola Oasis! Inscribimos a ${F.equipo.value.trim()} en la Oasis Cup ${cat() === 'masculino' ? 'masculina' : 'femenina'}.\n` +
     `Código: ${cod}\nCamiseta: ${color.id === 'otro' ? 'otro color (' + color.hex + ')' : color.id === 'asignar' ? 'color a asignar, talles genéricos' : color.n}\n` +
     `Quiero pagar ${pago}. Te paso el comprobante.\nCapitán/a: ${F.capitan.value.trim()} (${F.telefono.value.trim()})`;
@@ -202,7 +203,7 @@ form.addEventListener('submit', (e) => {
   const datos = {
     categoria: cat(), equipo: F.equipo.value.trim(), capitan: F.capitan.value.trim(), telefono: F.telefono.value.trim(), instagram: F.instagram.value.trim(),
     color: color.id, colorNombre: color.id === 'otro' ? 'Otro color' : color.n, eligeTalles: eligen, hex: color.hex, alternativo: F.alternativo.value,
-    pago: monto() === C.PRECIO_TOTAL ? 'Total' : 'Seña', monto: monto(), jugadores: jugadores(), arqueroColor: C.ARQUERO.n
+    pago: monto() === C.PRECIO_TOTAL ? 'Total' : 'Mitad', monto: monto(), jugadores: jugadores(), arqueroColor: C.ARQUERO.n
   };
   S.inscribir(datos).then((r) => {
     if (!r || !r.ok) {
@@ -228,7 +229,7 @@ function listo(cod) {
   $('listo-equipo').textContent = F.equipo.value.trim();
   $('listo-codigo').textContent = cod;
   $('listo-monto').textContent = `${plata(monto())} a ${C.ALIAS}.`;
-  $('listo-reserva').textContent = `Cuando confirmamos el pago, tu equipo aparece en la lista de confirmados. La camiseta queda reservada ${C.RESERVA_HORAS} horas.`;
+  $('listo-reserva').textContent = monto() === C.PRECIO_TOTAL ? `Cuando confirmamos el pago, tu equipo queda adentro. La camiseta queda reservada ${C.RESERVA_HORAS} horas mientras tanto.` : `Cuando confirmamos el pago, tu equipo queda adentro. El resto (${plata(C.PRECIO_TOTAL - C.PRECIO_SENA)}) lo pagás hasta el ${C.SALDO_HASTA}.`;
   $('msg-texto').textContent = msg;
   $('abrir-ig').href = 'https://ig.me/m/' + C.INSTAGRAM;
   $('abrir-ig').addEventListener('click', () => copiar(msg, 'Mensaje copiado: pegalo en el chat.'));

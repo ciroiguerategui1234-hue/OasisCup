@@ -5,83 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Oasis Cup × mirabella · Fútbol 8 en Puerto Madryn</title>
   <meta name="description" content="Torneo de fútbol 8 masculino y femenino, 7, 8 y 9 de enero en el Club Atlético Guillermo Brown, Puerto Madryn. Inscribí tu equipo.">
-  <meta name="theme-color" content="#121810">
+  <meta name="theme-color" content="#154F2B">
   <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%23D6C69C%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2216%22 text-anchor=%22middle%22 font-family=%22Arial Black%22%3EOC%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/bigshoulders-900.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 <body>
   <div class="demo-ribbon" id="demo-ribbon" hidden>Modo demostración: las inscripciones de prueba quedan solo en este navegador.</div>
 
   <header class="nav">
     <div class="wrap nav__in">
-      <a class="brand" href="#top" aria-label="Oasis Cup, inicio"><b>OASIS CUP</b><span>×</span><img src="assets/img/mirabella.png" alt="mirabella"></a>
+      <a class="brand" href="#top" aria-label="Oasis Cup, inicio"><b>Oasis Cup</b><span>×</span><img src="assets/img/sponsors/mirabella.webp" alt="mirabella" width="1200" height="187"></a>
       <nav class="nav__links" aria-label="Principal">
-        <a href="#como">Cómo es</a>
+        <a href="#formato">Cómo se juega</a>
         <a href="#vestuario">Camisetas</a>
+        <a href="#incluye">Qué incluye</a>
         <a href="#premios">Premios</a>
-        <a href="#torneo">Equipos y fixture</a>
         <a href="#faq">Preguntas</a>
       </nav>
-      <a class="btn btn--gold btn--sm" href="inscripcion.html">Inscribí tu equipo</a>
+      <a class="btn btn--ocre btn--sm" href="inscripcion.html">Inscribir equipo</a>
     </div>
   </header>
 
   <main id="top">
     <!-- PORTADA -->
-    <section class="hero">
-      <div class="hero__photo" aria-hidden="true"><img src="assets/img/vestuario-marino.jpg" alt=""></div>
+    <section class="hero cesped sobre-verde">
+      <svg class="hero__cal" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+        <rect x="0" y="0" width="1000" height="640"/>
+        <path d="M640 0V640"/>
+        <path d="M1000 150H880V450H1000"/>
+      </svg>
       <div class="wrap hero__in">
-        <img class="ping ping--hero" src="assets/img/pinguino/delantero.webp" width="560" height="551" alt="" aria-hidden="true">
-        <p class="hero__pre">Fútbol 8</p>
-        <h1 class="hero__title"><span>Oasis</span> <span>Cup</span></h1>
-        <p class="hero__x"><b>×</b><img src="assets/img/mirabella.png" alt="mirabella, productos del mar"></p>
-        <ul class="chips" aria-label="Categorías">
-          <li>Masculino</li><li>Femenino</li><li class="chip--gold">+ 3er tiempo</li>
-        </ul>
-        <div class="hero__cta">
-          <a class="btn btn--gold" href="inscripcion.html">Inscribí tu equipo</a>
-          <a class="btn btn--line" href="#vestuario">Ver camisetas</a>
+        <div class="hero__txt">
+          <h1 class="hero__t"><span>Oasis</span> <span>Cup</span></h1>
+          <p class="hero__x"><b>×</b><img src="assets/img/sponsors/mirabella.webp" alt="mirabella, productos del mar" width="1200" height="187"></p>
+          <p class="hero__sub">Fútbol 8 masculino y femenino. 7, 8 y 9 de enero en el Club Atlético Guillermo Brown, Puerto Madryn.</p>
+          <div class="hero__cta">
+            <a class="btn btn--ocre" href="inscripcion.html">Inscribir mi equipo</a>
+            <a href="#vestuario">Ver las camisetas</a>
+          </div>
         </div>
+        <img class="hero__ping ping" src="assets/img/pinguino/delantero.webp" alt="" aria-hidden="true" width="560" height="551">
       </div>
     </section>
 
-    <!-- PLANILLA: los datos del torneo -->
-    <section class="planilla" aria-label="Datos del torneo">
-      <div class="wrap planilla__in">
-        <div><span>Fecha</span><b>7, 8 y 9 de enero</b></div>
-        <div><span>Sede</span><b>Club Atlético Guillermo Brown</b></div>
-        <div><span>Inscripción</span><b id="pl-precio">$250.000 por equipo</b></div>
-        <div class="planilla__count" id="count" aria-label="Cuenta regresiva al torneo">
-          <span>Faltan</span>
-          <b><em id="c-d">--</em> días <em id="c-h">--</em> h <em id="c-m">--</em> min</b>
-        </div>
-      </div>
+    <section class="ficha" aria-label="Datos del torneo">
+      <dl class="wrap">
+        <div><dt>Cuándo</dt><dd>7, 8 y 9 de enero<small id="count">Faltan <span id="c-d">--</span> días</small></dd></div>
+        <div><dt>Dónde</dt><dd>Club Atlético Guillermo Brown<small>Puerto Madryn</small></dd></div>
+        <div><dt>Equipos</dt><dd>8 titulares y 2 suplentes<small>Masculino y femenino</small></dd></div>
+        <div><dt>Inscripción</dt><dd id="pl-precio">$250.000 por equipo</dd></div>
+      </dl>
     </section>
 
-    <!-- CÓMO ES -->
-    <section class="sec" id="como">
+    <!-- CÓMO SE JUEGA -->
+    <section class="sec pizarra sobre-golfo" id="formato">
       <div class="wrap">
-        <img class="ping ping--como" src="assets/img/pinguino/firmando.webp" width="477" height="560" alt="" aria-hidden="true" loading="lazy">
-        <h2 class="h-big">Cómo inscribirte</h2>
-        <ol class="pasos">
-          <li><b>Armá tu equipo</b><span>8 jugadores titulares y 2 suplentes, con el talle de cada uno. Masculino: <em id="p-cupo-m">de 8 a 12 equipos</em>. Femenino: <em id="p-cupo-f">hasta 6</em>.</span></li>
-          <li><b>Elegí tu camiseta</b><span>Cada color es de un solo equipo por categoría. El que llega primero, elige. Color y talles se eligen hasta el <em class="js-eleccion">30 de noviembre</em>.</span></li>
-          <li><b>Pagá la seña o el total</b><span>Seña <em id="p-sena">$125.000</em> o total <em id="p-total">$250.000</em> por equipo. Te guardamos la camiseta <em>48 horas</em>.</span></li>
-          <li><b>A la cancha</b><span>Cuando confirmamos el pago, tu equipo aparece en la lista de confirmados.</span></li>
-        </ol>
-        <a class="btn btn--gold" href="inscripcion.html">Empezar la inscripción</a>
+        <div class="sec__head">
+          <div>
+            <h2 class="t1">Cómo se juega</h2>
+            <p class="lead">Masculino y femenino tienen el mismo formato: dos zonas, semifinales cruzadas y una final por la copa.</p>
+          </div>
+        </div>
+        <div class="llave" id="llave">
+          <svg class="llave__svg" id="llave-svg" aria-hidden="true"></svg>
+          <div class="llave__col">
+            <p class="llave__fase">Fase de grupos</p>
+            <div class="zona" data-n="za"><b>Zona A</b><p>Todos contra todos dentro de la zona.</p><ol aria-hidden="true"><li></li><li></li><li></li><li></li></ol></div>
+            <div class="zona" data-n="zb"><b>Zona B</b><p>Todos contra todos dentro de la zona.</p><ol aria-hidden="true"><li></li><li></li><li></li><li></li></ol></div>
+          </div>
+          <div class="llave__col">
+            <p class="llave__fase">Semifinales</p>
+            <div class="cruce" data-n="s1"><b>1° Zona A <em>vs</em> 2° Zona B</b></div>
+            <div class="cruce" data-n="s2"><b>1° Zona B <em>vs</em> 2° Zona A</b></div>
+          </div>
+          <div class="llave__col">
+            <p class="llave__fase">Final</p>
+            <div class="final" data-n="f"><b>Por la copa</b><p>Juegan los ganadores de cada semifinal.</p></div>
+          </div>
+        </div>
+        <div class="pizarra__pie">
+          <div>
+            <h3 class="t3">Pasan los dos primeros de cada zona</h3>
+            <p class="nota">El formato puede variar según la cantidad de equipos inscriptos. Si cambia, lo avisamos acá antes del sorteo de zonas.</p>
+          </div>
+          <div>
+            <h3 class="t3">Fixture, horarios y resultados</h3>
+            <div id="fixture"><p class="nota">Los publicamos acá cuando cierre la inscripción. Durante el torneo, los resultados se actualizan partido a partido.</p></div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- VESTUARIO 3D -->
-    <section class="vest-sec" id="vestuario">
-      <div class="wrap vest-sec__head">
+    <section class="vest-sec cesped sobre-verde" id="vestuario">
+      <div class="wrap sec__head">
         <div>
-          <h2 class="h-big">El vestuario</h2>
-          <p class="lead">Nueve colores por categoría y cada uno es de un solo equipo. Arrastrá el perchero y tocá una camiseta: las que ya tienen dueño cuelgan con su etiqueta.</p>
+          <h2 class="t1">Elegí la camiseta</h2>
+          <p class="lead">Nueve colores por categoría y cada uno es de un solo equipo: el primero que lo reserva se lo queda.</p>
           <p class="plazo" id="plazo"></p>
         </div>
-        <img class="ping ping--vest" src="assets/img/pinguino/senalando.webp" width="353" height="560" alt="" aria-hidden="true" loading="lazy">
         <div class="vest-sec__side">
           <div class="seg" role="tablist" aria-label="Categoría" id="cat-tabs">
             <button role="tab" aria-selected="true" data-c="masculino">Masculino</button>
@@ -93,80 +117,91 @@
       <div class="vest" id="vest">
         <div class="vest__fallback" id="vest-fallback" hidden></div>
       </div>
-      <div class="wrap vest__bar">
-        <button class="round" data-dir="-1" aria-label="Ver camisetas anteriores">‹</button>
-        <button class="round" data-dir="1" aria-label="Ver camisetas siguientes">›</button>
-        <p class="vest__msg" id="vest-msg" aria-live="polite">Los arqueros de todos los equipos usan la misma camiseta, para distinguirlos bien.</p>
+      <div class="wrap">
+        <div class="vest__bar">
+          <button class="flecha" data-dir="-1" aria-label="Ver camisetas anteriores">‹</button>
+          <button class="flecha" data-dir="1" aria-label="Ver camisetas siguientes">›</button>
+          <p class="vest__msg" id="vest-msg" aria-live="polite">Tocá una camiseta para verla de cerca.</p>
+        </div>
+        <p class="vest__tip">Arrastrá para recorrer la soga y tocá una foto para verla de cerca.</p>
+        <p class="maqueta"><b>Son maquetas de referencia.</b> Las fotos muestran el color de cada camiseta. El diseño final (detalles, ubicación de sponsors y tipografías) puede tener cambios.</p>
       </div>
-      <div class="wrap"><p class="maqueta"><b>Maqueta de referencia.</b> Las fotos muestran el color de cada camiseta. El diseño final (detalles, ubicación de sponsors y tipografías) puede tener cambios.</p></div>
     </section>
 
-    <!-- KIT -->
-    <section class="sec sec--cream" id="kit">
+    <!-- QUÉ INCLUYE -->
+    <section class="sec" id="incluye">
       <div class="wrap">
-        <h2 class="h-big h-big--dark">Lo que te llevás sí o sí</h2>
-        <ul class="kit">
-          <li><img src="assets/img/kit-camiseta.png" alt="Camiseta del torneo, frente y espalda"><b>Una camiseta por jugador</b></li>
-          <li><img src="assets/img/kit-trago.png" alt="Ficha de un trago del 3er tiempo"><b>Un trago por jugador</b></li>
-          <li><img src="assets/img/kit-agua.png" alt="Botellas de agua Oasis Cup"><b>Hidratación durante el torneo</b></li>
-          <li><img src="assets/img/kit-pulsera.png" alt="Pulsera de acceso al 3er tiempo"><b>Acceso al 3er tiempo</b></li>
-        </ul>
-        <div class="precio">
-          <div><span>Inscripción por equipo</span><b id="precio-total">$250.000</b></div>
-          <div><span>Seña para reservar</span><b id="precio-sena">$125.000</b></div>
-          <p>Mismo valor para masculino y femenino. Pagás por transferencia y nos mandás el comprobante por Instagram.</p>
+        <div class="sec__head"><h2 class="t1">Qué incluye la inscripción</h2></div>
+        <div class="incluye">
+          <div>
+            <h3>Para cada jugador</h3>
+            <ul class="items">
+              <li class="item"><b>Camiseta del torneo</b><p>Del color de tu equipo y con su talle, si se inscriben hasta el <span class="js-eleccion">30 de noviembre</span>.</p></li>
+              <li class="item"><b>Hidratación</b><p>Agua durante los tres días de torneo.</p></li>
+              <li class="item"><b>Tercer tiempo</b><p>Acceso y una consumición.</p><img src="assets/img/pinguino/bartender.webp" alt="" aria-hidden="true" width="335" height="560" loading="lazy"></li>
+            </ul>
+          </div>
+          <div>
+            <h3>En la cancha</h3>
+            <ul class="items">
+              <li class="item"><b>Árbitros</b><p>En todos los partidos.</p></li>
+              <li class="item"><b>Seguridad</b><p>En el club durante todo el torneo.</p><img src="assets/img/pinguino/patovica.webp" alt="" aria-hidden="true" width="308" height="560" loading="lazy"></li>
+              <li class="item"><b>Fotógrafo</b><p>Saca fotos de los partidos y del tercer tiempo.</p></li>
+            </ul>
+          </div>
         </div>
+        <dl class="precio">
+          <div><dt>Inscripción por equipo</dt><dd id="precio-total">$250.000</dd></div>
+          <div><dt>Para anotarte</dt><dd id="precio-sena">$125.000</dd></div>
+          <p id="precio-txt">Mismo valor en masculino y femenino. Pagás la mitad al anotarte y el resto hasta el 6 de enero, un día antes del primer partido.</p>
+        </dl>
       </div>
     </section>
 
     <!-- PREMIOS -->
     <section class="sec premios-sec" id="premios">
       <div class="wrap">
-        <img class="ping ping--premios" src="assets/img/pinguino/campeon.webp" width="400" height="560" alt="" aria-hidden="true" loading="lazy">
-        <h2 class="h-big premios__t">Premios</h2>
+        <div class="sec__head"><h2 class="t1">Premios</h2></div>
         <div class="premios">
+          <img class="premios__ping ping" src="assets/img/pinguino/campeon.webp" alt="" aria-hidden="true" width="400" height="560" loading="lazy">
           <div class="premio-cat">
-            <h3 class="h-cat">Masculino</h3>
-            <div class="podio podio--1"><span class="pos">1°<small>Puesto</small></span><p><em>Campeón</em>Asado para 10 + 10 VIPs Oasis Party</p></div>
-            <div class="podio"><span class="pos">2°<small>Puesto</small></span><p><em>Subcampeón</em>10 entradas generales Oasis Party</p></div>
+            <h3>Masculino</h3>
+            <div class="puesto"><span>1°</span><p><b>Campeón</b>Asado para 10 y 10 entradas VIP para la Oasis Party.</p></div>
+            <div class="puesto puesto--2"><span>2°</span><p><b>Subcampeón</b>10 entradas generales para la Oasis Party.</p></div>
           </div>
           <div class="premio-cat">
-            <h3 class="h-cat">Femenino</h3>
-            <div class="podio podio--1"><span class="pos">1°<small>Puesto</small></span><p><em>Campeonas</em>6 botellas de gin, vodka o fernet a elección + 10 VIPs Oasis Party</p></div>
-            <div class="podio"><span class="pos">2°<small>Puesto</small></span><p><em>Subcampeonas</em>10 entradas generales Oasis Party</p></div>
+            <h3>Femenino</h3>
+            <div class="puesto"><span>1°</span><p><b>Campeonas</b>6 botellas de gin, vodka o fernet, a elección, y 10 entradas VIP para la Oasis Party.</p></div>
+            <div class="puesto puesto--2"><span>2°</span><p><b>Subcampeonas</b>10 entradas generales para la Oasis Party.</p></div>
           </div>
+        </div>
+        <div class="individuales">
+          <div class="individual"><b>Jugador del partido</b><p>Premio para la figura de cada partido eliminatorio: las dos semifinales y la final, en cada categoría.</p></div>
+          <div class="individual"><b>Goleador del torneo</b><p>Premio para quien haga más goles en masculino y para quien haga más goles en femenino.</p></div>
         </div>
       </div>
     </section>
 
-    <!-- EQUIPOS Y FIXTURE -->
-    <section class="sec sec--deep" id="torneo">
+    <!-- CÓMO INSCRIBIRTE -->
+    <section class="sec" id="como">
       <div class="wrap">
-        <h2 class="h-big">El torneo</h2>
-        <div class="seg seg--small" role="tablist" aria-label="Categoría" id="tor-tabs">
-          <button role="tab" aria-selected="true" data-c="masculino">Masculino</button>
-          <button role="tab" aria-selected="false" data-c="femenino">Femenino</button>
-        </div>
-        <div class="torneo">
-          <div>
-            <h3 class="h-mid">Equipos confirmados</h3>
-            <p class="cupo-txt" id="cupo-txt"></p>
-            <ul class="equipos" id="equipos"></ul>
-          </div>
-          <div>
-            <h3 class="h-mid">Fixture y resultados</h3>
-            <div id="fixture"></div>
-          </div>
-        </div>
+        <div class="sec__head"><h2 class="t1">Cómo inscribirte</h2></div>
+        <ol class="pasos">
+          <li><b><em>1</em>Armá el equipo</b><span>Nombre del equipo, categoría y los 10 jugadores con DNI. Masculino tiene lugar para <strong id="p-cupo-m">8 a 12 equipos</strong>; femenino, para <strong id="p-cupo-f">6</strong>.</span></li>
+          <li><b><em>2</em>Elegí color y talles</b><span>Hasta el <strong class="js-eleccion">30 de noviembre</strong>. Después, la camiseta va con color asignado y talles genéricos de S a XL.</span></li>
+          <li><b><em>3</em>Pagá la mitad</b><span><strong id="p-sena">$125.000</strong> por transferencia. Con eso tu camiseta queda reservada; si no llega en <strong>48 horas</strong>, el color se libera.</span></li>
+          <li><b><em>4</em>Completá el pago</b><span>Los otros <strong id="p-total">$125.000</strong> hasta el <strong>6 de enero</strong>, sin falta.</span></li>
+        </ol>
+        <a class="btn btn--ocre" href="inscripcion.html">Empezar la inscripción</a>
       </div>
     </section>
 
     <!-- SEDE -->
     <section class="sede">
-      <img src="assets/img/cancha-aerea.jpg" alt="Cancha de fútbol iluminada de noche, vista desde arriba" class="sede__img">
-      <div class="wrap sede__in">
-                <h2 class="h-big">Club Atlético<br>Guillermo Brown</h2>
-        <p class="lead">Puerto Madryn. 7, 8 y 9 de enero, con el 3er tiempo para cerrar cada jornada.</p>
+      <img src="assets/img/cancha-aerea.jpg" alt="Cancha de fútbol iluminada de noche, vista desde arriba" loading="lazy">
+      <div class="sede__in">
+        <h2 class="t1">Club Atlético Guillermo Brown</h2>
+        <p class="lead">Puerto Madryn. Tres días de partidos, con tercer tiempo para cerrar cada jornada.</p>
         <a class="btn btn--line" id="mapa" target="_blank" rel="noopener" href="#">Cómo llegar</a>
       </div>
     </section>
@@ -175,18 +210,18 @@
     <section class="sec" id="faq">
       <div class="wrap faq">
         <div>
-          <h2 class="h-big">Preguntas</h2>
-          <img class="ping ping--faq" src="assets/img/pinguino/arquero.webp" width="560" height="560" alt="" aria-hidden="true" loading="lazy">
+          <h2 class="t1">Preguntas</h2>
+          <img class="faq__ping ping" src="assets/img/pinguino/arquero.webp" alt="" aria-hidden="true" width="560" height="560" loading="lazy">
         </div>
         <div class="faq__list">
           <details><summary>¿Cuántos jugadores tiene cada equipo?</summary><p>8 titulares y hasta 2 suplentes. Cada uno recibe su camiseta.</p></details>
-          <details><summary>¿Cuántos equipos juegan?</summary><p>En masculino, de 8 a 12 equipos según la demanda. En femenino, hasta 6 equipos por ahora. Cuando se llena el cupo, se cierra la inscripción de esa categoría.</p></details>
+          <details><summary>¿Cuántos equipos juegan?</summary><p>En masculino, de 8 a 12 equipos según la demanda. En femenino, hasta 6 equipos por ahora. Cuando se llena el cupo de una categoría, se cierra su inscripción.</p></details>
+          <details><summary>¿Cómo se paga?</summary><p>Por transferencia. Al anotarte pagás la mitad ($125.000) y el resto lo pagás hasta el 6 de enero, un día antes del primer partido. Si querés, podés pagar todo de una. El comprobante nos lo mandás por Instagram.</p></details>
           <details><summary>¿Hasta cuándo puedo elegir color y talles?</summary><p id="faq-eleccion"></p></details>
-          <details><summary>¿Las camisetas son iguales a las fotos?</summary><p>Las fotos son maquetas para que elijas el color. La camiseta final respeta ese color, pero el diseño (detalles, ubicación de sponsors y tipografías) puede cambiar. El color de los arqueros todavía está a definir.</p></details>
-          <details><summary>¿Qué camiseta usa el arquero?</summary><p>Todos los arqueros del torneo usan el mismo color, distinto al de los equipos, para distinguirlos en la cancha. Al inscribirte marcás quién ataja y su talle.</p></details>
-          <details><summary>¿Qué pasa si no pago la seña?</summary><p>Tu camiseta queda reservada 48 horas desde la inscripción. Si en ese tiempo no confirmamos la seña, el color vuelve a quedar disponible.</p></details>
-          <details><summary>¿Puedo pedir un color que no está?</summary><p>Sí: elegí “Otro color” en el vestuario y marcá el tono. Lo confirmamos por Instagram según disponibilidad.</p></details>
-          <details><summary>¿Cómo pago?</summary><p>Por transferencia, la seña o el total. Al terminar la inscripción te armamos el mensaje para mandarnos el comprobante por Instagram.</p></details>
+          <details><summary>¿Las camisetas son iguales a las fotos?</summary><p>Las fotos son maquetas para que elijas el color. La camiseta final respeta ese color, pero el diseño (detalles, ubicación de sponsors y tipografías) puede cambiar.</p></details>
+          <details><summary>¿Qué camiseta usa el arquero?</summary><p>Todos los arqueros del torneo usan la misma camiseta, de un color distinto al de los equipos, para distinguirlos en la cancha. El color lo confirmamos antes del torneo.</p></details>
+          <details><summary>¿Qué pasa si no pago la mitad a tiempo?</summary><p>Tu camiseta queda reservada 48 horas desde la inscripción. Si en ese tiempo no recibimos el pago, el color vuelve a quedar libre para otro equipo.</p></details>
+          <details><summary>¿Puedo pedir un color que no está?</summary><p>Sí: elegí “Otro color” en la soga y marcá el tono. Lo confirmamos por Instagram según disponibilidad.</p></details>
           <details><summary>¿Hasta cuándo me puedo inscribir?</summary><p id="faq-cierre"></p></details>
           <details><summary>¿Hay reglamento?</summary><p>[Reglamento del torneo a cargar]</p></details>
         </div>
@@ -194,24 +229,27 @@
     </section>
 
     <!-- CIERRE -->
-    <section class="cierre">
+    <section class="cierre cesped sobre-verde">
       <div class="wrap cierre__in">
-        <img class="ping ping--cierre" src="assets/img/pinguino/brindando.webp" width="408" height="560" alt="" aria-hidden="true" loading="lazy">
-        <h2 class="h-giant">¿Jugamos?</h2>
+        <h2 class="cierre__t">¿Jugamos?</h2>
         <p class="lead">Quedan <b id="cierre-libres">9</b> colores libres en masculino y <b id="cierre-libres-f">9</b> en femenino.</p>
-        <a class="btn btn--gold" href="inscripcion.html">Inscribí tu equipo</a>
+        <a class="btn btn--ocre" href="inscripcion.html">Inscribir mi equipo</a>
+        <img class="cierre__ping ping" src="assets/img/pinguino/brindando.webp" alt="" aria-hidden="true" width="408" height="560" loading="lazy">
       </div>
     </section>
   </main>
 
   <footer class="foot">
     <div class="wrap">
-      <ul class="sponsors" aria-label="Acompañan">
-        <li><img src="assets/img/mirabella.png" alt="mirabella, productos del mar" class="sp-mira"></li>
-        <li class="sp-holas">HOLA'S</li>
-        <li><img src="assets/img/parry.png" alt="Parry Smart Hotel" class="sp-round"></li>
-        <li><img src="assets/img/conservas.png" alt="Conservas Puerto Madryn" class="sp-round"></li>
-      </ul>
+      <div class="sponsors">
+        <p>Acompañan</p>
+        <ul>
+          <li><img src="assets/img/sponsors/mirabella.webp" alt="mirabella, productos del mar" class="sp-mira" width="1200" height="187" loading="lazy"></li>
+          <li><img src="assets/img/sponsors/holas.webp" alt="Hola's" class="sp-holas" width="1000" height="135" loading="lazy"></li>
+          <li><img src="assets/img/sponsors/parry.webp" alt="Parry Smart Hotel" class="sp-parry" width="600" height="227" loading="lazy"></li>
+          <li><img src="assets/img/sponsors/conservas.webp" alt="Conservas Puerto Madryn" class="sp-cons" width="420" height="465" loading="lazy"></li>
+        </ul>
+      </div>
       <div class="foot__in">
         <p>Una producción de <b>Oasis Producciones</b>, Puerto Madryn.</p>
         <a href="https://www.instagram.com/oasisparty.pm/" target="_blank" rel="noopener">@oasisparty.pm</a>

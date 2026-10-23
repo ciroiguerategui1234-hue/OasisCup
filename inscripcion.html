@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Inscribí tu equipo · Oasis Cup × mirabella</title>
   <meta name="description" content="Inscripción de equipos para la Oasis Cup, torneo de fútbol 8 en Puerto Madryn.">
-  <meta name="theme-color" content="#121810">
+  <meta name="theme-color" content="#154F2B">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="inscripcion.css">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%23D6C69C%22/%3E%3Ctext x=%2216%22 y=%2222%22 font-size=%2216%22 text-anchor=%22middle%22 font-family=%22Arial Black%22%3EOC%3C/text%3E%3C/svg%3E">
+  <link rel="icon" type="image/png" href="assets/img/favicon.png">
 </head>
 <body class="ins-page">
   <div class="demo-ribbon" id="demo-ribbon" hidden>Modo demostración: las inscripciones de prueba quedan solo en este navegador.</div>
@@ -16,7 +16,7 @@
   <header class="nav">
     <div class="wrap nav__in">
       <a class="back" href="index.html" aria-label="Volver a la página del torneo"><span aria-hidden="true">‹</span> Volver</a>
-      <a class="brand" href="index.html"><b>OASIS CUP</b><span>×</span><img src="assets/img/mirabella.png" alt="mirabella"></a>
+      <a class="brand" href="index.html"><b>Oasis Cup</b><span>×</span><img src="assets/img/sponsors/mirabella.webp" alt="mirabella" width="1200" height="187"></a>
       <span class="nav__spacer"></span>
     </div>
   </header>
@@ -24,8 +24,7 @@
   <main class="ins">
     <div class="wrap ins__head">
       <img class="ping ping--ins" src="assets/img/pinguino/firmando.webp" width="477" height="560" alt="" aria-hidden="true">
-      <p class="kicker kicker--gold">Inscripción</p>
-      <h1 class="h-big">Armá tu equipo</h1>
+      <h1 class="t1">Inscribí tu equipo</h1>
       <p class="plazo" id="plazo"></p>
       <ol class="stepper" id="stepper">
         <li data-s="1" class="is-on"><b>1</b><span>Equipo</span></li>
@@ -49,7 +48,7 @@
           <label class="f">WhatsApp<input name="telefono" type="tel" autocomplete="tel" placeholder="280 4XX XXXX"></label>
           <label class="f">Instagram <span class="opt">(opcional)</span><input name="instagram" placeholder="@usuario"></label>
         </div>
-        <div class="paso__nav"><span></span><button type="button" class="btn btn--gold" data-go="2">Seguir</button></div>
+        <div class="paso__nav"><span></span><button type="button" class="btn btn--ocre" data-go="2">Seguir</button></div>
       </section>
 
       <!-- 2. Jugadores -->
@@ -58,26 +57,26 @@
         <p class="paso__lead">8 titulares y hasta 2 suplentes. Marcá quién ataja: usa la camiseta de arquero, que es del mismo color para todos los equipos.</p>
         <div class="plantel" id="plantel"></div>
         <p class="plantel__cuenta" id="cuenta" aria-live="polite"></p>
-        <div class="paso__nav"><button type="button" class="link-btn" data-go="1">Volver</button><button type="button" class="btn btn--gold" data-go="3">Seguir</button></div>
+        <div class="paso__nav"><button type="button" class="link-btn" data-go="1">Volver</button><button type="button" class="btn btn--ocre" data-go="3">Seguir</button></div>
       </section>
 
       <!-- 3. Camiseta -->
       <section class="paso paso--wide" data-step="3" hidden>
         <div class="wrap">
           <h2 class="paso__t">Elegí la camiseta</h2>
-          <p class="paso__lead">Arrastrá la barra y tocá un color libre: se descuelga y te muestra la espalda con el nombre de tu equipo.</p>
+          <p class="paso__lead">Arrastrá la soga y tocá un color libre: la foto viene al frente con el nombre de tu equipo en la espalda.</p>
         </div>
         <div class="wrap asignada" id="asignada" hidden>
           <p><b>Ya cerró la elección de camisetas.</b> Te podés inscribir igual: la organización le asigna a tu equipo un color libre y las camisetas van con talles genéricos variados, de <span class="js-genericos">S a XL</span>.</p>
         </div>
-        <div class="vest vest--ins" id="vest"><div class="vest__fallback" id="vest-fallback" hidden></div></div>
+        <div class="vest vest--ins cesped" id="vest"><div class="vest__fallback" id="vest-fallback" hidden></div></div>
         <div class="wrap">
           <div class="vest__bar">
-            <button type="button" class="round" data-dir="-1" aria-label="Ver camisetas anteriores">‹</button>
-            <button type="button" class="round" data-dir="1" aria-label="Ver camisetas siguientes">›</button>
+            <button type="button" class="flecha" data-dir="-1" aria-label="Ver camisetas anteriores">‹</button>
+            <button type="button" class="flecha" data-dir="1" aria-label="Ver camisetas siguientes">›</button>
             <p class="vest__msg" id="vest-msg" aria-live="polite">Ningún color elegido todavía.</p>
           </div>
-          <p class="maqueta"><b>Maqueta de referencia.</b> Las fotos muestran el color de cada camiseta. El diseño final (detalles, ubicación de sponsors y tipografías) puede tener cambios.</p>
+          <p class="maqueta"><b>Son maquetas de referencia.</b> Las fotos muestran el color de cada camiseta. El diseño final (detalles, ubicación de sponsors y tipografías) puede tener cambios.</p>
           <div class="eleccion" id="eleccion" hidden>
             <div class="eleccion__main"><i id="el-swatch"></i><div><small>Tu camiseta</small><b id="el-nombre"></b></div></div>
             <label class="f f--inline" id="otro-wrap" hidden>Tono<input type="color" id="otro-color" value="#C9A227"></label>
@@ -85,7 +84,7 @@
               <select name="alternativo" id="alternativo"></select>
             </label>
           </div>
-          <div class="paso__nav"><button type="button" class="link-btn" data-go="2">Volver</button><button type="button" class="btn btn--gold" data-go="4">Seguir</button></div>
+          <div class="paso__nav"><button type="button" class="link-btn" data-go="2">Volver</button><button type="button" class="btn btn--ocre" data-go="4">Seguir</button></div>
         </div>
       </section>
 
@@ -96,8 +95,8 @@
           <div class="resumen" id="resumen"></div>
           <div>
             <div class="monto" role="radiogroup" aria-label="Qué querés pagar">
-              <label><input type="radio" name="pago" value="sena" checked><span><small>Seña</small><b id="m-sena"></b><em>Reserva la camiseta</em></span></label>
-              <label><input type="radio" name="pago" value="total"><span><small>Total</small><b id="m-total"></b><em>Inscripción completa</em></span></label>
+              <label><input type="radio" name="pago" value="sena" checked><span><small>La mitad ahora</small><b id="m-sena"></b><em id="m-sena-txt">El resto hasta el 6 de enero</em></span></label>
+              <label><input type="radio" name="pago" value="total"><span><small>Todo junto</small><b id="m-total"></b><em>Y te olvidás del saldo</em></span></label>
             </div>
             <div class="transf">
               <p>Transferí a</p>
@@ -105,7 +104,7 @@
               <small id="titular"></small>
             </div>
             <p class="aviso" id="aviso-reserva"></p>
-            <button type="submit" class="btn btn--gold btn--full" id="enviar">Confirmar inscripción</button>
+            <button type="submit" class="btn btn--ocre btn--full" id="enviar">Confirmar inscripción</button>
             <p class="err-global" id="err" role="alert"></p>
           </div>
         </div>
@@ -116,8 +115,8 @@
     <!-- Listo -->
     <section class="listo wrap" id="listo" hidden>
       <img class="ping ping--listo" src="assets/img/pinguino/bailando.webp" width="377" height="560" alt="" aria-hidden="true" loading="lazy">
-      <p class="kicker kicker--gold">¡Equipo inscripto!</p>
-      <h2 class="h-big" id="listo-equipo"></h2>
+      <p class="listo__ok">¡Equipo inscripto!</p>
+      <h2 class="t1" id="listo-equipo"></h2>
       <p class="listo__code">Código <b id="listo-codigo"></b></p>
       <ol class="listo__pasos">
         <li><b>Transferí</b><span id="listo-monto"></span></li>
@@ -128,7 +127,7 @@
         <p class="msg__label">El mensaje</p>
         <pre id="msg-texto"></pre>
         <div class="msg__actions">
-          <a class="btn btn--gold" id="abrir-ig" target="_blank" rel="noopener" href="#">Abrir Instagram de Oasis</a>
+          <a class="btn btn--ocre" id="abrir-ig" target="_blank" rel="noopener" href="#">Abrir Instagram de Oasis</a>
           <button type="button" class="btn btn--line" id="copiar-msg">Copiar mensaje</button>
         </div>
       </div>

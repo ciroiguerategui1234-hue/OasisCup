@@ -14,6 +14,7 @@ window.OASIS = {
   ELECCION_TEXTO: '30 de noviembre',
   TALLES_GENERICOS: 'S a XL',
   RESERVA_HORAS: 48,
+  SALDO_HASTA: '6 de enero',                   // el resto se paga hasta un día antes del torneo
   CUPO: { masculino: 12, femenino: 6 },          // máximo de equipos por categoría
   CUPO_TEXTO: { masculino: 'De 8 a 12 equipos, según la demanda', femenino: 'Hasta 6 equipos' },
   INICIO: '2027-01-07T09:00:00-03:00',          // para la cuenta regresiva
