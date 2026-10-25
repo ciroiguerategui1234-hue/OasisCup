@@ -7,12 +7,12 @@ const plata = (n) => '$' + Number(n).toLocaleString('es-AR');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-$('pl-precio').textContent = plata(C.PRECIO_TOTAL) + ' por equipo';
+$('pl-precio').textContent = plata(C.PRECIO_TOTAL) + ' por equipo, con seña del 50%';
 $('precio-total').textContent = plata(C.PRECIO_TOTAL);
 $('precio-sena').textContent = plata(C.PRECIO_SENA);
 $('p-sena').textContent = plata(C.PRECIO_SENA);
 $('p-total').textContent = plata(C.PRECIO_TOTAL - C.PRECIO_SENA);
-$('precio-txt').textContent = `Mismo valor en masculino y femenino. Pagás la mitad al anotarte y el resto hasta el ${C.SALDO_HASTA}, un día antes del primer partido.`;
+$('precio-txt').textContent = `Es un solo pago de ${plata(C.PRECIO_TOTAL)} en total, dividido en dos: señás con ${plata(C.PRECIO_SENA)} al anotarte y pagás los otros ${plata(C.PRECIO_TOTAL - C.PRECIO_SENA)} hasta el ${C.SALDO_HASTA}, un día antes del primer partido. Mismo valor en masculino y femenino.`;
 $('mapa').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(C.SEDE_MAPA);
 $('faq-cierre').textContent = 'Hasta completar el cupo de cada categoría: masculino de 8 a 12 equipos, femenino hasta 6.';
 const eligen = Date.now() < new Date(C.ELECCION_HASTA).getTime();

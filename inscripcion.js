@@ -168,7 +168,7 @@ F.equipo.addEventListener('input', () => vest && vest.setEquipo(F.equipo.value.t
 
 /* ---------- Paso 4: pago ---------- */
 $('m-sena').textContent = plata(C.PRECIO_SENA); $('m-total').textContent = plata(C.PRECIO_TOTAL);
-$('m-sena-txt').textContent = `Los otros ${plata(C.PRECIO_TOTAL - C.PRECIO_SENA)} hasta el ${C.SALDO_HASTA}`;
+$('m-sena-txt').textContent = `De ${plata(C.PRECIO_TOTAL)} en total. Los otros ${plata(C.PRECIO_TOTAL - C.PRECIO_SENA)} hasta el ${C.SALDO_HASTA}`;
 const conAlias = !!(C.ALIAS && C.ALIAS.trim());
 $('alias').textContent = C.ALIAS; $('titular').textContent = C.TITULAR;
 $('transf-alias').hidden = !conAlias; $('transf-ig').hidden = conAlias; $('ig-user').textContent = C.INSTAGRAM;
