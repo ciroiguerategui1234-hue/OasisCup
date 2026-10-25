@@ -95,7 +95,12 @@
               <label><input type="radio" name="pago" value="sena" checked><span><small>La mitad ahora</small><b id="m-sena"></b><em id="m-sena-txt">El resto hasta el 6 de enero</em></span></label>
               <label><input type="radio" name="pago" value="total"><span><small>Todo junto</small><b id="m-total"></b><em>Y te olvidás del saldo</em></span></label>
             </div>
-            <div class="transf">
+            <div class="transf" id="transf-ig" hidden>
+              <p>Datos de pago</p>
+              <div class="transf__alias"><b>Te los pasamos por Instagram</b></div>
+              <small>Al confirmar te abrimos el chat de @<span id="ig-user"></span> con un mensaje listo para pedirlos.</small>
+            </div>
+            <div class="transf" id="transf-alias">
               <p>Transferí a</p>
               <div class="transf__alias"><b id="alias"></b><button type="button" class="link-btn" id="copy-alias">Copiar</button></div>
               <small id="titular"></small>
@@ -116,8 +121,8 @@
       <h2 class="t1" id="listo-equipo"></h2>
       <p class="listo__code">Código <b id="listo-codigo"></b></p>
       <ol class="listo__pasos">
-        <li><b>Transferí</b><span id="listo-monto"></span></li>
-        <li><b>Mandanos el comprobante por Instagram</b><span>Ya copiamos el mensaje: abrí el chat, pegalo y adjuntá el comprobante.</span></li>
+        <li><b id="listo-p1"></b><span id="listo-monto"></span></li>
+        <li><b id="listo-p2"></b><span id="listo-p2-txt"></span></li>
         <li><b>Te confirmamos</b><span id="listo-reserva"></span></li>
       </ol>
       <div class="msg">

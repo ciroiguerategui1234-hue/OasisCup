@@ -9,8 +9,8 @@ window.OASIS = {
   INSTAGRAM: 'oasisparty.pm',
   PRECIO_TOTAL: 250000,
   PRECIO_SENA: 125000,
-  ALIAS: '[ALIAS O CVU a confirmar]',
-  TITULAR: '[Titular de la cuenta]',
+  ALIAS: '',   // si lo completás, la web muestra el alias; vacío = los datos de pago se piden por Instagram
+  TITULAR: '',
   CIERRE_INSCRIPCION: 'hasta completar el cupo',
   // Hasta esta fecha se eligen color y talles. Después: color asignado y talles genéricos.
   ELECCION_HASTA: '2026-11-30T23:59:59-03:00',

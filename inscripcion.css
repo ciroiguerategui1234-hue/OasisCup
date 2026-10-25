@@ -145,4 +145,5 @@
   .monto b { font-size: 1.8rem; }
   .vest--ins { height: 470px; }
   .ping--ins { width: 82px; top: -14px; right: 12px; }
+  .ins__head > h1, .ins__head > p { padding-right: 84px; }
 }

@@ -169,7 +169,9 @@ F.equipo.addEventListener('input', () => vest && vest.setEquipo(F.equipo.value.t
 /* ---------- Paso 4: pago ---------- */
 $('m-sena').textContent = plata(C.PRECIO_SENA); $('m-total').textContent = plata(C.PRECIO_TOTAL);
 $('m-sena-txt').textContent = `Los otros ${plata(C.PRECIO_TOTAL - C.PRECIO_SENA)} hasta el ${C.SALDO_HASTA}`;
+const conAlias = !!(C.ALIAS && C.ALIAS.trim());
 $('alias').textContent = C.ALIAS; $('titular').textContent = C.TITULAR;
+$('transf-alias').hidden = !conAlias; $('transf-ig').hidden = conAlias; $('ig-user').textContent = C.INSTAGRAM;
 $('aviso-reserva').textContent = `Al confirmar, la camiseta queda reservada ${C.RESERVA_HORAS} horas. Si en ese tiempo no recibimos el pago, el color se libera para otro equipo.`;
 $('copy-alias').addEventListener('click', () => copiar(C.ALIAS, 'Alias copiado.'));
 function monto() { return form.querySelector('input[name=pago]:checked').value === 'total' ? C.PRECIO_TOTAL : C.PRECIO_SENA; }
@@ -186,7 +188,7 @@ function mensaje(cod) {
   const pago = monto() === C.PRECIO_TOTAL ? `el total (${plata(C.PRECIO_TOTAL)})` : `la mitad (${plata(C.PRECIO_SENA)}) y el resto hasta el ${C.SALDO_HASTA}`;
   return `¡Hola Oasis! Inscribimos a ${F.equipo.value.trim()} en la Oasis Cup ${cat() === 'masculino' ? 'masculina' : 'femenina'}.\n` +
     `Código: ${cod}\nCamiseta: ${color.id === 'otro' ? 'otro color (' + color.hex + ')' : color.id === 'asignar' ? 'color a asignar, talles genéricos' : color.n}\n` +
-    `Quiero pagar ${pago}. Te paso el comprobante.\nCapitán/a: ${F.capitan.value.trim()} (${F.telefono.value.trim()})`;
+    (conAlias ? `Quiero pagar ${pago}. Te paso el comprobante.\n` : `Quiero pagar ${pago}. ¿Me pasan los datos para transferir?\n`) + `Capitán/a: ${F.capitan.value.trim()} (${F.telefono.value.trim()})`;
 }
 function copiar(txt, ok) {
   const done = () => toast(ok);
@@ -227,7 +229,13 @@ function listo(cod) {
   form.hidden = true; document.querySelector('.ins__head').hidden = true; $('listo').hidden = false;
   $('listo-equipo').textContent = F.equipo.value.trim();
   $('listo-codigo').textContent = cod;
-  $('listo-monto').textContent = `${plata(monto())} a ${C.ALIAS}.`;
+  if (conAlias) {
+    $('listo-p1').textContent = 'Transferí'; $('listo-monto').textContent = `${plata(monto())} a ${C.ALIAS}.`;
+    $('listo-p2').textContent = 'Mandanos el comprobante por Instagram'; $('listo-p2-txt').textContent = 'Ya copiamos el mensaje: abrí el chat, pegalo y adjuntá el comprobante.';
+  } else {
+    $('listo-p1').textContent = 'Pedinos los datos de pago por Instagram'; $('listo-monto').textContent = 'Ya copiamos el mensaje: abrí el chat de Oasis y pegalo. Te respondemos con los datos para transferir ' + plata(monto()) + '.';
+    $('listo-p2').textContent = 'Transferí y mandanos el comprobante'; $('listo-p2-txt').textContent = 'Por el mismo chat, así lo anotamos.';
+  }
   $('listo-reserva').textContent = monto() === C.PRECIO_TOTAL ? `Cuando confirmamos el pago, tu equipo queda adentro. La camiseta queda reservada ${C.RESERVA_HORAS} horas mientras tanto.` : `Cuando confirmamos el pago, tu equipo queda adentro. El resto (${plata(C.PRECIO_TOTAL - C.PRECIO_SENA)}) lo pagás hasta el ${C.SALDO_HASTA}.`;
   $('msg-texto').textContent = msg;
   $('abrir-ig').href = 'https://ig.me/m/' + C.INSTAGRAM;
