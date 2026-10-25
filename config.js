@@ -1,7 +1,10 @@
 // Oasis Cup × mirabella · configuración (lo que cambia el organizador)
 window.OASIS = {
-  // URL de la app de Google Apps Script (ver LEEME). Vacío = modo demostración (los datos quedan en el navegador).
-  API_URL: '/api/inscripciones',
+  // Las inscripciones se mandan a este Formulario de Google (nadie lo ve: la web lo completa sola)
+  FORM_URL: 'https://docs.google.com/forms/d/e/1FAIpQLSetuvSNR15BQ73iyWDzBnZolvnXGfponQ8LGeMLz_n8mdliTw/formResponse',
+  FORM_CAMPOS: { codigo: 'entry.1944162448', categoria: 'entry.1509108166', equipo: 'entry.455621616', capitan: 'entry.286392889', whatsapp: 'entry.1622412799', camiseta: 'entry.96980697', pago: 'entry.1264538432', jugadores: 'entry.1835525223' },
+  // La pestaña "Para la web (no tocar)" de la planilla, publicada como CSV (sin datos personales)
+  PLANILLA_CSV: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQx0K-StOXrmbD1HGFMkk2PkBKMP9i9McTiLjeN47lXxG-_4SMs7wWIalBll-8PO_fW0Mlh4GZRnmGY/pub?gid=697942810&single=true&output=csv',
 
   INSTAGRAM: 'oasisparty.pm',
   PRECIO_TOTAL: 250000,
